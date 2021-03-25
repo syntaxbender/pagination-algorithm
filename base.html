@@ -1,0 +1,38 @@
+<script type="text/javascript">
+	let step = 1;
+	let directionIndicator = 0;
+	const currentPage = 19;
+	let string = currentPage;
+	const lastPage = 20;
+	let slip = 0;
+	let indicatorStopper = 0;
+	// 0 negative direction
+	// 1 pozitive direction
+	while(step <= 10){ // totalde 11 buton olacaktır.
+		const addition = (indicatorStopper == 0) ? Math.ceil(step/2) : step;
+		if(directionIndicator == 0){
+			const pageNum = currentPage-addition+slip;
+			if(indicatorStopper == 1 && pageNum<1) break;
+			if(pageNum<1){
+				indicatorStopper = 1;
+				directionIndicator = (directionIndicator+1)%2;
+				slip = (Number.isInteger(step/2) === false) ? (Math.ceil(step/2)-1) : 0;
+				continue;
+			}
+			string = pageNum+" "+string;
+		}else{
+			const pageNum = currentPage+addition-slip;
+			if(indicatorStopper == 1 && pageNum>lastPage) break;
+			if(pageNum>lastPage){
+				indicatorStopper = 1;
+				directionIndicator = (directionIndicator+1)%2;
+				slip = (Number.isInteger(step/2)) ? (Math.ceil(step/2)-1) : 0;
+				continue;
+			}
+			string = string+" "+pageNum;
+		}
+		if(indicatorStopper == 0) directionIndicator = (directionIndicator+1)%2;
+		step++;
+	}
+	console.log(string);
+</script> 
